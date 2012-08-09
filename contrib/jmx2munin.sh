@@ -28,17 +28,16 @@ if [ -z "$config" -o -z "$query" -o -z "$url" ]; then
   exit 1
 fi
 
-JMX2MUNIN_DIR="$MUNIN_LIBDIR/plugins"
-CONFIG="$JMX2MUNIN_DIR/jmx2munin.cfg/$config"
+CONFIG="/etc/munin/jmx2munin/$config"
 
 if [ "$1" = "config" ]; then
     cat "$CONFIG"
     exit 0
 fi
 
-JAR="$JMX2MUNIN_DIR/jmx2munin.jar"
+JAR="$MUNIN_LIBDIR/jmx2munin.jar"
 URLSUM=`echo -n "$url" | cksum | cut -d ' ' -f 1`
-CACHED="/tmp/jmx2munin.$URLSUM"
+CACHED="${MUNIN_STATEFILE}"
 
 if test ! -f $CACHED || test `find "$CACHED" -mmin +2`; then
 
