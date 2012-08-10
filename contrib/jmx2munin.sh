@@ -39,8 +39,7 @@ JAR="$MUNIN_LIBDIR/jmx2munin.jar"
 CACHED="${MUNIN_STATEFILE}"
 
 if test ! -f $CACHED || test `find "$CACHED" -mmin +2`; then
-
-    java -jar "$JAR" \
+    jmx2munin \
       -url "$url" \
       -query "$query" \
       $ATTRIBUTES \
